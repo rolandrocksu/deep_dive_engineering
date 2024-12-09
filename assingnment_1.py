@@ -6,6 +6,8 @@ def main():
     if res == 0:
         os.execl("/bin/ls", "ls")
     
+    os.wait()
+
     print("Parent process done")
 
 

@@ -11,6 +11,9 @@ def main():
     if res == 0:
         os.execl("/bin/date", "date")
     
+    os.wait()
+    os.wait()
+
     print("Parent process done")
 
 

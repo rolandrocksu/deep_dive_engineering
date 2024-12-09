@@ -6,6 +6,7 @@ def main():
     if res == 0:
         os.execl("/bin/echo", "echo", "Hello from the child process")
     
+    os.wait()
     print("Parent process done")
 
 
