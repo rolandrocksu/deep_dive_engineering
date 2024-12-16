@@ -2,7 +2,6 @@
 #include <stdlib.h>
 #include <pthread.h>
 
-// TODO 
 void* print_message(void* arg) {
     int thread_id = *(int*)arg;
     printf("Thread %d is running! \n", thread_id);
