@@ -5,10 +5,12 @@ int x = 5;
 
 
 void* increment(void* arg) {
+    x++;
     return NULL;
 }
 
 void* decrement(void* arg) {
+    x--;
     return NULL;
 }
 
