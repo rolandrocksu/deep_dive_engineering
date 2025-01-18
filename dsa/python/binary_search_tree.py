@@ -110,9 +110,15 @@ class Node:
                 node.parent.left = min_node
             
         elif node.left:
-            node.parent.left = node.left
+            if node.value > node.parent.value:
+                node.parent.right = node.left
+            else:
+                node.parent.left =  node.left
         elif node.right:
-            node.parent.right = node.right
+            if node.value > node.parent.value:
+                node.parent.right = node.right
+            else:
+                node.parent.left = node.right
         else:
             if node.value > node.parent.value:
                 node.parent.right = None
@@ -139,4 +145,45 @@ class Node:
     
             current_layer = next_layer
     
+    def inorder_traversal(self):
+        result = []
+        if self.left:
+            result += self.left.inorder_traversal()
 
+        result.append(self.value)
+        
+        if self.right:
+            result += self.right.inorder_traversal()
+        
+        return result
+    
+    def preorder_traversal(self):
+        result = []
+
+        result.append(self.value)
+
+        if self.left:
+            result += self.left.preorder_traversal()
+
+        if self.right:
+            result += self.right.preorder_traversal()
+
+        
+        
+        return result
+
+
+    def next_inorder(self):
+
+        if self.right:
+            return self.right.find_min()
+
+        current = self
+
+        while current and current == current.parent.right:
+            current = current.parent
+
+        return current.parent
+    
+    def next_preorder(self):
+        pass

@@ -64,6 +64,28 @@ class TestBinarySearchTree:
         print("-- Miroring recursively --")
         self.root.miror_recursively()
 
+    def test_traversal(self):
+        print("-- Traversal --")
+        res = self.root.inorder_traversal()
+        print(f"Inorder Traversal: {self.root.inorder_traversal()}")
+        print(f"Preorder Traversal: {self.root.preorder_traversal()}")
+    
+    def test_next_inorder(self):
+        print("-- Next in Order --")
+        res = self.root.next_inorder()
+
+        in_order_nodes = self.root.inorder_traversal()
+        print(f"Inorder Traversal: {in_order_nodes}")
+
+        for i, value in enumerate(in_order_nodes):
+            node = self.root.search_value_iterative(value)
+            successor = node.next_inorder()
+            successor_value = successor.value if successor else None
+            expected_successor = in_order_nodes[i + 1] if i + 1 < len(in_order_nodes) else None
+            print(f"Node: {node.value}, Expected Successor: {expected_successor}, Actual Successor: {successor_value}")
+            assert successor_value == expected_successor, "Mismatch in in-order successor!"
+
+
 if __name__ == "__main__":
     test_instance = TestBinarySearchTree()
     tests_map = {
@@ -71,7 +93,9 @@ if __name__ == "__main__":
         "insert": test_instance.test_insertion,
         "isbst": test_instance.test_is_binary_search_tree,
         "remove_node": test_instance.test_remove_node,
-        "miror": test_instance.test_miror
+        "miror": test_instance.test_miror,
+        "traversal": test_instance.test_traversal,
+        "next_inorder": test_instance.test_next_inorder
     }
 
     if len(sys.argv) < 2:
