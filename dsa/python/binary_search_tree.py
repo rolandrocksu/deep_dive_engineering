@@ -168,8 +168,6 @@ class Node:
         if self.right:
             result += self.right.preorder_traversal()
 
-        
-        
         return result
 
 
@@ -186,4 +184,49 @@ class Node:
         return current.parent
     
     def next_preorder(self):
-        pass
+        if self.left:
+            return self.left
+        
+        if self.right:
+            return self.right
+        
+        current = self
+        while current.parent:
+            if current == current.parent.left and current.parent.right:
+                return current.parent.right
+            current = current.parent
+
+        return None
+
+    
+
+    def max_depth(self):
+        if self.left is None and self.right is None:
+            return 0
+        if self.left and self.right:
+            return 1 + max(self.left.max_depth(), self.right.max_depth())
+        
+        if self.left:
+            return 1 + self.left.max_depth()
+        if self.right:
+            return 1 + self.right.max_depth()
+    
+    def min_depth(self):
+        if self.left is None and self.right is None:
+            return 0
+        if self.left and self.right:
+            return 1 + min(self.left.min_depth(), self.right.min_depth())
+        
+        if self.left:
+            return 1 + self.left.min_depth()
+        if self.right:
+            return 1 + self.right.min_depth()
+        
+
+    def calculate_balanceness(self):
+        max_depth = self.max_depth()
+        min_depth = self.min_depth()
+        
+        if max_depth == 0:
+            return 0
+        return min_depth / max_depth

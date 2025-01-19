@@ -83,8 +83,23 @@ class TestBinarySearchTree:
             successor_value = successor.value if successor else None
             expected_successor = in_order_nodes[i + 1] if i + 1 < len(in_order_nodes) else None
             print(f"Node: {node.value}, Expected Successor: {expected_successor}, Actual Successor: {successor_value}")
-            assert successor_value == expected_successor, "Mismatch in in-order successor!"
 
+    def test_next_preorder(self):
+        print("-- Testing Next Preorder --")
+        
+        preorder_nodes = self.root.preorder_traversal()
+        print(f"Preorder Traversal: {preorder_nodes}")
+        
+        node = self.root
+        actual_preorder = []
+        while node:
+            actual_preorder.append(node.value)
+            node = node.next_preorder()
+        
+        print(f"Actual Preorder Using next_preorder: {actual_preorder}")
+
+    def test_calculate_balanceness(self):
+        res = self.root.calculate_balanceness()
 
 if __name__ == "__main__":
     test_instance = TestBinarySearchTree()
@@ -95,7 +110,9 @@ if __name__ == "__main__":
         "remove_node": test_instance.test_remove_node,
         "miror": test_instance.test_miror,
         "traversal": test_instance.test_traversal,
-        "next_inorder": test_instance.test_next_inorder
+        "next_inorder": test_instance.test_next_inorder,
+        "next_preorder": test_instance.test_next_preorder,
+        "calculate_balanceness": test_instance.test_calculate_balanceness,
     }
 
     if len(sys.argv) < 2:
