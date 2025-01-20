@@ -9,7 +9,7 @@ class OpenAddressingHashtable:
     def hash_function(self, value) -> int:
         result = 0
         for indx, item in enumerate(value):
-            result += 17**indx * (sum([ord(item) for char in item]))
+            result += 17**indx * ord(item)
         result %= self.keys_count 
         return result
     

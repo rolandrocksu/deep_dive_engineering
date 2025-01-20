@@ -4,6 +4,8 @@ class Hashtable:
     def __init__(self):
         self.table = dict()
         self.keys_count = 28
+        self.values_count = 0
+        self.status = "normal"
 
     def __str__(self):
         return f"{self.table}"
@@ -11,7 +13,7 @@ class Hashtable:
     def hash_function(self, value) -> str:
         result = 0
         for indx, item in enumerate(value):
-            result += 17**indx * (sum([ord(item) for char in item]))
+            result += 17**indx * ord(item)
         result %= self.keys_count 
         return str(result)
 
@@ -23,7 +25,11 @@ class Hashtable:
             new_node = LinkedList(value)
             new_node.next = self.table[value_hash]
             self.table[value_hash] = new_node
-        
+
+        self.values_count += 1
+        if not self.values_count % 10:
+            if self.load_factor() > 1.5:
+                self.rehash()
         return True
     
     def remove(self, value):
@@ -31,6 +37,8 @@ class Hashtable:
         self.table[value_hash]
         if value == self.table[value_hash].value:
             self.table[value_hash] = self.table[value_hash].next
+        
+        self.values_count -= 1
         return True
     
     def search(self, value):
@@ -47,12 +55,23 @@ class Hashtable:
 
         return values_count
 
-
     def load_factor(self):
-        values_count = self.calculate_value_count()
-        return values_count / self.keys_count
+        # values_count = self.calculate_value_count()
+        return self.values_count / self.keys_count
     
     def rehash(self):
+        old_table = self.table
+        self.keys_count *= 2
+        self.table = dict()
+        self.values_count = 0
+
+        for value in old_table.values():
+            current = value
+            while current:
+                self.insert(current.value)
+                current = current.next
+    
+    def lazy_rehash(self):
         pass
 
 
