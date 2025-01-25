@@ -1,4 +1,4 @@
-from linked_list import LinkedList
+from dsa.python.simple_data_structures.linked_list import LinkedList
 
 class Hashtable:
     def __init__(self):
@@ -37,6 +37,8 @@ class Hashtable:
         self.table[value_hash]
         if value == self.table[value_hash].value:
             self.table[value_hash] = self.table[value_hash].next
+
+        # TODO
         
         self.values_count -= 1
         return True

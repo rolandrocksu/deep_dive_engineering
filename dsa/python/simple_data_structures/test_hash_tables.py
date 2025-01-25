@@ -1,8 +1,8 @@
 import random
 import string
-from open_addressing_hash_table import OpenAddressingHashtable
+from dsa.python.simple_data_structures.open_addressing_hash_table import OpenAddressingHashtable
 
-def effect_of_primary_clustering():
+def effect_of_clustering():
     hash_table = OpenAddressingHashtable(size=500)
     for _ in range(400):
         random_string = ''.join(random.choices(string.ascii_letters + string.digits, k=9))
@@ -36,5 +36,5 @@ def test_open_addressing_hashtable():
 
 
 if __name__ == "__main__":
-    effect_of_primary_clustering()
+    effect_of_clustering()
     # test_open_addressing_hashtable()

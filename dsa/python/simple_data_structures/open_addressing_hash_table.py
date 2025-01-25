@@ -120,5 +120,20 @@ class OpenAddressingHashtable:
                 self.insert(item)
         
     
-    def lazy_rehash():
+    def lazy_rehash(self):
         pass
+
+    def remove(self, value):
+        value_hash = self.hash_function(value)
+        index = value_hash
+
+        if self.table[index] == value:
+            # Remove the value and place a marker to preserve probe sequence
+            self.table[index] = None
+            self.values_count -= 1
+            return True
+
+        while True:
+            index += 1
+            next_value = self.table[index]
+            pass

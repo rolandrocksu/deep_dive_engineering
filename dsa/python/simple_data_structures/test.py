@@ -1,7 +1,7 @@
 import random
 import sys
 
-from binary_search_tree import Node
+from dsa.python.simple_data_structures.binary_search_tree import Node
 
 class TestBinarySearchTree:
 
