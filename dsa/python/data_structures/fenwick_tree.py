@@ -1,0 +1,3 @@
+
+class FenwickTree:
+    pass

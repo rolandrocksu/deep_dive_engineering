@@ -28,4 +28,4 @@ class Knapsack:
         return optimal
 
 kp = Knapsack(10)
-print(kp.get_maximal_bonuses())
+print(kp.compute_maximal_bonuses())
